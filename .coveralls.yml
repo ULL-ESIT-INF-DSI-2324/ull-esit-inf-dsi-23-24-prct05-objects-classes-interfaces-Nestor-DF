@@ -1,1 +1,5 @@
 # repo_token: <your token>
+
+# básicamente esto es useless hasta que no ponga en la página web mi repo (que debe ser público) 
+# y copie el token aquí. Hecho esto puedo copiar el batch de markdown que me da la página web y 
+# pegarlo en el README.md para que se vea mas fancy y también podría acceder a estadísticas del repo.
