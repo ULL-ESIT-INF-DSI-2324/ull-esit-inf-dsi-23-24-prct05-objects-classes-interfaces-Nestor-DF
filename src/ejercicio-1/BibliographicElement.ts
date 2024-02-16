@@ -4,7 +4,4 @@ export interface BibliographicElement {
   keywords: string[];
   abstract: string;
   publicationDate: string;
-  pages: string;
-  publisher: string;
-  generateIEEEFormat(): string;
 }

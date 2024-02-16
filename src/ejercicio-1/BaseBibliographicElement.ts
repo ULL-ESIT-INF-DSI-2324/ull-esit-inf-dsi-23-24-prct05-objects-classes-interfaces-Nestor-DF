@@ -1,0 +1,16 @@
+import { BibliographicElement } from "./BibliographicElement";
+import { IEEEFormattable } from "./IEEEFormattable";
+
+export class BaseBibliographicElement implements BibliographicElement, IEEEFormattable {
+  constructor(
+    public title: string,
+    public authors: string[],
+    public keywords: string[],
+    public abstract: string,
+    public publicationDate: string,
+  ) {}
+
+  exportToIEEEFormat(): string {
+    return `${this.authors.join(", ")}, "${this.title}," ${this.publicationDate}.`;
+  }
+}

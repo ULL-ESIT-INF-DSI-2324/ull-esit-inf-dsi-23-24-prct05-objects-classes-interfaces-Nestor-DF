@@ -1,26 +1,42 @@
-import { BibliographicElement } from "./BibliographicElement";
+import { BaseBibliographicElement } from "./BaseBibliographicElement";
 
 export class BibliographicManager {
-  elements: BibliographicElement[] = [];
+  elements: BaseBibliographicElement[] = [];
 
-  showAllElements(): void {
+  showTable(): void {
     console.table(this.elements);
   }
 
-  searchByKeyword(keyword: string): BibliographicElement[] {
-    return this.elements.filter((element) =>
-      element.keywords.includes(keyword)
+  filter(filters: { keyword?: string; title?: string; author?: string; date?: string; publisher?: string }): void {
+    console.table(
+      this.elements.filter(
+        (element) =>
+          (!filters.keyword || element.keywords.includes(filters.keyword)) &&
+          (!filters.title || element.title === filters.title) &&
+          (!filters.author || element.authors.includes(filters.author)) &&
+          (!filters.date || element.publicationDate === filters.date) &&
+          (!filters.publisher || element.publisher === filters.publisher)
+      )
     );
   }
 
-  searchByAuthor(author: string): BibliographicElement[] {
-    return this.elements.filter((element) => element.authors.includes(author));
-  }
-
-  ExportIEEEFormat(elements: BibliographicElement[]): string {
-    const ieeeFormatResults = elements.map((result) =>
-      result.generateIEEEFormat()
-    );
+  exportIEEEFormat(filters: {
+    keyword?: string;
+    title?: string;
+    author?: string;
+    date?: string;
+    publisher?: string;
+  }): string {
+    const ieeeFormatResults = this.elements
+      .filter(
+        (element) =>
+          (!filters.keyword || element.keywords.includes(filters.keyword)) &&
+          (!filters.title || element.title === filters.title) &&
+          (!filters.author || element.authors.includes(filters.author)) &&
+          (!filters.date || element.publicationDate === filters.date) &&
+          (!filters.publisher || element.publisher === filters.publisher)
+      )
+      .map((result) => result.exportToIEEEFormat());
     return ieeeFormatResults.join("\n");
   }
 }
