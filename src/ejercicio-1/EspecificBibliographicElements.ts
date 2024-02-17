@@ -70,7 +70,9 @@ export class TechnicalRules extends BaseBibliographicElement {
     super(title, authors, keywords, abstract, publicationDate, pages, publisher);
   }
   exportToIEEEFormat(): string {
-    return `${this.title}, ${this.standardNumber}, ${this.authors.join(", ")}, ${this.publicationDate}.`;
+    const opcionesFormato: Intl.DateTimeFormatOptions = { year: "numeric" };
+    const fechaFormateada: string = this.publicationDate.toLocaleDateString("en-US", opcionesFormato);
+    return `${this.title}, ${this.standardNumber}, ${this.authors.join(", ")}, ${fechaFormateada}.`;
   }
 }
 

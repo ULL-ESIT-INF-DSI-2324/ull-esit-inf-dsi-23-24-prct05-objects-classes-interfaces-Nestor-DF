@@ -1,6 +1,6 @@
 import "mocha";
 import { expect } from "chai";
-import { BibliographicManager } from "../src/ejercicio-1/BibliographicManager";
+import { BibliographicManager } from "../../src/ejercicio-1/BibliographicManager";
 import {
   Patent,
   TechnicalReport,
@@ -8,7 +8,7 @@ import {
   AcademicWorks,
   JournalArticle,
   Book,
-} from "../src/ejercicio-1/EspecificBibliographicElements";
+} from "../../src/ejercicio-1/EspecificBibliographicElements";
 
 describe("BibliographicManager", () => {
   let bibliographicManager: BibliographicManager;

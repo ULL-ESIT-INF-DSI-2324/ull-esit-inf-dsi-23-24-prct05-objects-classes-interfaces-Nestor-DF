@@ -1,10 +1,10 @@
-import { BibliographicElement } from "./BibliographicElement";
-import { IEEEFormattable } from "./IEEEFormattable";
+import { BibliographicElement } from "./interfaces";
+import { IEEEFormattable } from "./interfaces";
 
 /**
  * Base class that represents a bibliographic element.
  */
-export class BaseBibliographicElement implements BibliographicElement, IEEEFormattable {
+export abstract class BaseBibliographicElement implements BibliographicElement, IEEEFormattable {
   constructor(
     public title: string,
     public authors: string[],
@@ -15,7 +15,5 @@ export class BaseBibliographicElement implements BibliographicElement, IEEEForma
     public publisher: string
   ) {}
 
-  exportToIEEEFormat(): string {
-    return `${this.authors.join(", ")}, "${this.title}," ${this.publicationDate}.`;
-  }
+  abstract exportToIEEEFormat(): string;
 }

@@ -10,3 +10,10 @@ export interface BibliographicElement {
   pages: string;
   publisher: string;
 }
+
+/**
+ * Interface IEEEFormattable
+ */
+export interface IEEEFormattable {
+  exportToIEEEFormat(): string;
+}
