@@ -6,14 +6,18 @@ export class Patente extends BaseBibliographicElement {
     authors: string[],
     keywords: string[],
     abstract: string,
-    publicationDate: string,
+    publicationDate: Date,
     public country: string,
     public patentNumber: string
   ) {
     super(title, authors, keywords, abstract, publicationDate);
   }
 
-  // Puedes añadir métodos específicos para la clase Patente si es necesario
+  exportToIEEEFormat(): string {
+    const opcionesFormato: Intl.DateTimeFormatOptions = { month: "short", day: "numeric", year: "numeric" };
+    const fechaFormateada: string = this.publicationDate.toLocaleDateString("en-US", opcionesFormato);
+    return `${this.authors.join(", ")}, "${this.title}," ${this.country} ${this.patentNumber}, ${fechaFormateada}.`;
+  }
 }
 
 export class InformeTecnico extends BaseBibliographicElement {
@@ -22,7 +26,7 @@ export class InformeTecnico extends BaseBibliographicElement {
     authors: string[],
     keywords: string[],
     abstract: string,
-    publicationDate: string,
+    publicationDate: Date,
     public institution: string,
     public country: string,
     public reportType: string,
@@ -31,7 +35,13 @@ export class InformeTecnico extends BaseBibliographicElement {
     super(title, authors, keywords, abstract, publicationDate);
   }
 
-  // Puedes añadir métodos específicos para la clase InformeTecnico si es necesario
+  exportToIEEEFormat(): string {
+    const opcionesFormato: Intl.DateTimeFormatOptions = { month: "short", day: "numeric", year: "numeric" };
+    const fechaFormateada: string = this.publicationDate.toLocaleDateString("en-US", opcionesFormato);
+    return `${this.authors.join(", ")}, "${this.title}," ${this.institution}, ${this.country}, ${this.reportType} ${
+      this.reportNumber
+    }, ${fechaFormateada}.`;
+  }
 }
 
 export class NormaTecnica extends BaseBibliographicElement {
@@ -40,13 +50,14 @@ export class NormaTecnica extends BaseBibliographicElement {
     authors: string[],
     keywords: string[],
     abstract: string,
-    publicationDate: string,
+    publicationDate: Date,
     public standardNumber: string
   ) {
     super(title, authors, keywords, abstract, publicationDate);
   }
-
-  // Puedes añadir métodos específicos para la clase NormaTecnica si es necesario
+  exportToIEEEFormat(): string {
+    return `${this.title}, ${this.standardNumber}, ${this.authors.join(", ")}, ${this.publicationDate}`;
+  }
 }
 
 export class TrabajosAcademicos extends BaseBibliographicElement {
@@ -55,7 +66,7 @@ export class TrabajosAcademicos extends BaseBibliographicElement {
     authors: string[],
     keywords: string[],
     abstract: string,
-    publicationDate: string,
+    publicationDate: Date,
     public type: string,
     public department: string,
     public institution: string,
@@ -64,7 +75,13 @@ export class TrabajosAcademicos extends BaseBibliographicElement {
     super(title, authors, keywords, abstract, publicationDate);
   }
 
-  // Puedes añadir métodos específicos para la clase TrabajosAcademicos si es necesario
+  exportToIEEEFormat(): string {
+    const opcionesFormato: Intl.DateTimeFormatOptions = { year: "numeric" };
+    const fechaFormateada: string = this.publicationDate.toLocaleDateString("en-US", opcionesFormato);
+    return `${this.authors.join(", ")}, "${this.title}," ${this.type}, ${this.department}, ${this.institution} ${
+      this.country
+    }, ${fechaFormateada}.`;
+  }
 }
 
 export class ArticuloRevista extends BaseBibliographicElement {
@@ -73,7 +90,7 @@ export class ArticuloRevista extends BaseBibliographicElement {
     authors: string[],
     keywords: string[],
     abstract: string,
-    publicationDate: string,
+    publicationDate: Date,
     public journal: string,
     public volume: string,
     public number: number,
@@ -82,7 +99,13 @@ export class ArticuloRevista extends BaseBibliographicElement {
     super(title, authors, keywords, abstract, publicationDate);
   }
 
-  // Puedes añadir métodos específicos para la clase ArticuloRevista si es necesario
+  exportToIEEEFormat(): string {
+    const opcionesFormato: Intl.DateTimeFormatOptions = { month: "short", year: "numeric" };
+    const fechaFormateada: string = this.publicationDate.toLocaleDateString("en-US", opcionesFormato);
+    return `${this.authors.join(", ")}, "${this.title}," ${this.journal}, ${this.volume}, ${this.number} ${
+      this.pages
+    }, ${fechaFormateada}.`;
+  }
 }
 
 export class Libro extends BaseBibliographicElement {
@@ -91,7 +114,7 @@ export class Libro extends BaseBibliographicElement {
     authors: string[],
     keywords: string[],
     abstract: string,
-    publicationDate: string,
+    publicationDate: Date,
     public edition: string,
     public place: string,
     public publisher: string
@@ -99,5 +122,10 @@ export class Libro extends BaseBibliographicElement {
     super(title, authors, keywords, abstract, publicationDate);
   }
 
-  // Puedes añadir métodos específicos para la clase Libro si es necesario
+  exportToIEEEFormat(): string {
+    const opcionesFormato: Intl.DateTimeFormatOptions = { year: "numeric" };
+    const fechaFormateada: string = this.publicationDate.toLocaleDateString("en-US", opcionesFormato);
+    return `${this.authors.join(", ")}, ${this.title}, ${this.edition}. ${this.place}: ${this.publisher}, 
+    ${fechaFormateada}.`;
+  }
 }

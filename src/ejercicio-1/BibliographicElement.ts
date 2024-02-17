@@ -3,5 +3,5 @@ export interface BibliographicElement {
   authors: string[];
   keywords: string[];
   abstract: string;
-  publicationDate: string;
+  publicationDate: Date;
 }

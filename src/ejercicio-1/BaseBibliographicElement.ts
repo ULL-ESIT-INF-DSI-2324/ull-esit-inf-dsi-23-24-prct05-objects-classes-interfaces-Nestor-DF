@@ -7,7 +7,7 @@ export class BaseBibliographicElement implements BibliographicElement, IEEEForma
     public authors: string[],
     public keywords: string[],
     public abstract: string,
-    public publicationDate: string,
+    public publicationDate: Date,
   ) {}
 
   exportToIEEEFormat(): string {
