@@ -1,5 +1,8 @@
 import { BaseBibliographicElement } from "./BaseBibliographicElement";
 
+/**
+ * Class that represents a patent.
+ */
 export class Patent extends BaseBibliographicElement {
   constructor(
     title: string,
@@ -22,6 +25,9 @@ export class Patent extends BaseBibliographicElement {
   }
 }
 
+/**
+ * Class that represents a technical report.
+ */
 export class TechnicalReport extends BaseBibliographicElement {
   constructor(
     title: string,
@@ -46,6 +52,10 @@ export class TechnicalReport extends BaseBibliographicElement {
   }
 }
 
+
+/**
+ * Class that represents a technical rule.
+ */
 export class TechnicalRules extends BaseBibliographicElement {
   constructor(
     title: string,
@@ -64,6 +74,9 @@ export class TechnicalRules extends BaseBibliographicElement {
   }
 }
 
+/**
+ * Class that represents an academic work.
+ */
 export class AcademicWorks extends BaseBibliographicElement {
   constructor(
     title: string,
@@ -88,6 +101,9 @@ export class AcademicWorks extends BaseBibliographicElement {
   }
 }
 
+/**
+ * Class that represents a journal article.
+ */
 export class JournalArticle extends BaseBibliographicElement {
   constructor(
     title: string,
@@ -111,6 +127,9 @@ export class JournalArticle extends BaseBibliographicElement {
   }
 }
 
+/**
+ * Class that represents a book.
+ */
 export class Book extends BaseBibliographicElement {
   constructor(
     title: string,

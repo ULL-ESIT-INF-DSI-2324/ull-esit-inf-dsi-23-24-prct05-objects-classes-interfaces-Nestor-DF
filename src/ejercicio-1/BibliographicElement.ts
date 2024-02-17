@@ -1,3 +1,6 @@
+/**
+ * Interface that represents a bibliographic element.
+ */
 export interface BibliographicElement {
   title: string;
   authors: string[];

@@ -84,7 +84,14 @@ describe("BibliographicManager", () => {
       "Place",
       "Publisher"
     );
-    bibliographicManager = new BibliographicManager([patente, informeTecnico, normaTecnica, trabajosAcademicos, articuloRevista, libro]);
+    bibliographicManager = new BibliographicManager([
+      patente,
+      informeTecnico,
+      normaTecnica,
+      trabajosAcademicos,
+      articuloRevista,
+      libro,
+    ]);
   });
 
   it("should export elements in IEEE format based on given filters", () => {

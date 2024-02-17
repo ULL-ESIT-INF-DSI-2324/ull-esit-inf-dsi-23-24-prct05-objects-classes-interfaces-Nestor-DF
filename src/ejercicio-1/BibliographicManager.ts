@@ -1,5 +1,8 @@
 import { BaseBibliographicElement } from "./BaseBibliographicElement";
 
+/**
+ * BibliographicManager class that manages a list of bibliographic elements and provides methods to filter and export them.
+ */
 export class BibliographicManager {
   elements: BaseBibliographicElement[] = [];
 

@@ -1,6 +1,9 @@
 import { BibliographicElement } from "./BibliographicElement";
 import { IEEEFormattable } from "./IEEEFormattable";
 
+/**
+ * Base class that represents a bibliographic element.
+ */
 export class BaseBibliographicElement implements BibliographicElement, IEEEFormattable {
   constructor(
     public title: string,
