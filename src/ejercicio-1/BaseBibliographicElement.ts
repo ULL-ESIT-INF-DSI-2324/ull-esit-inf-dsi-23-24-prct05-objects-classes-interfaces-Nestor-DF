@@ -8,6 +8,8 @@ export class BaseBibliographicElement implements BibliographicElement, IEEEForma
     public keywords: string[],
     public abstract: string,
     public publicationDate: Date,
+    public pages: string,
+    public publisher: string
   ) {}
 
   exportToIEEEFormat(): string {

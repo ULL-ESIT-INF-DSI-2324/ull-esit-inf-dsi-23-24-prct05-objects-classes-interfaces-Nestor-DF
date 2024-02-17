@@ -3,11 +3,19 @@ import { BaseBibliographicElement } from "./BaseBibliographicElement";
 export class BibliographicManager {
   elements: BaseBibliographicElement[] = [];
 
+  constructor(list: BaseBibliographicElement[] = []) {
+    this.elements = list;
+  }
+
+  addElement(element: BaseBibliographicElement): void {
+    this.elements.push(element);
+  }
+
   showTable(): void {
     console.table(this.elements);
   }
 
-  filter(filters: { keyword?: string; title?: string; author?: string; date?: string; publisher?: string }): void {
+  filter(filters: { keyword?: string; title?: string; author?: string; date?: Date; publisher?: string }): void {
     console.table(
       this.elements.filter(
         (element) =>
@@ -24,7 +32,7 @@ export class BibliographicManager {
     keyword?: string;
     title?: string;
     author?: string;
-    date?: string;
+    date?: Date;
     publisher?: string;
   }): string {
     const ieeeFormatResults = this.elements
