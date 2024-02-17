@@ -2,7 +2,18 @@
 <li>Autor: Néstor Delgado Feliciano</li>
 <li>Correo: <a href="mailto:alu0101488998@ull.edu.es">alu0101488998@ull.edu.es</a></li>
 </ul>
-<a id="md:índice" class="tsd-anchor"></a><h2><a href="#md:índice"><strong>Índice</strong></a></h2><a id="md:introducción" class="tsd-anchor"></a><h2><a href="#md:introducción"><strong>Introducción</strong></a></h2><p>En esta práctica resolveré una serie de ejercicios de programación que me permitirán conocer más en profundidad los objetos, clases e interfaces del lenguaje TypeScript.</p>
+<a id="md:índice" class="tsd-anchor"></a><h2><a href="#md:índice"><strong>Índice</strong></a></h2><ul>
+<li><a href="#md:práctica-5---objetos-clases-e-interfaces">Práctica 5 - Objetos, clases e interfaces</a><ul>
+<li><a href="#md:índice"><strong>Índice</strong></a></li>
+<li><a href="#md:introducción"><strong>Introducción</strong></a></li>
+<li><a href="#md:ejercicio-1---gestor-de-referencias-bibliográficas"><strong>Ejercicio 1 - Gestor de referencias bibliográficas</strong></a></li>
+<li><a href="#md:ejercicio-2---menús-saludables-orientados-a-objetos"><strong>Ejercicio 2 - Menús saludables orientados a objetos</strong></a></li>
+<li><a href="#md:conclusiones"><strong>Conclusiones</strong></a></li>
+<li><a href="#md:referencias"><strong>Referencias</strong></a></li>
+</ul>
+</li>
+</ul>
+<a id="md:introducción" class="tsd-anchor"></a><h2><a href="#md:introducción"><strong>Introducción</strong></a></h2><p>En esta práctica resolveré una serie de ejercicios de programación que me permitirán conocer más en profundidad los objetos, clases e interfaces del lenguaje TypeScript.</p>
 <a id="md:ejercicio-1---gestor-de-referencias-bibliográficas" class="tsd-anchor"></a><h2><a href="#md:ejercicio-1---gestor-de-referencias-bibliográficas"><strong>Ejercicio 1 - Gestor de referencias bibliográficas</strong></a></h2><p>En primer lugar, definí dos interfaces, una para los elementos bibliográficos y otra para implementar la función de exportar a formato IEEE. Las dividí principalmente por seguir el principio SOLID &quot;Interface segregation principle&quot;.</p>
 <pre><code class="language-ts"><span class="hl-0">export</span><span class="hl-1"> </span><span class="hl-2">interface</span><span class="hl-1"> </span><span class="hl-3">BibliographicElement</span><span class="hl-1"> {</span><br/><span class="hl-1">  </span><span class="hl-4">title</span><span class="hl-1">: </span><span class="hl-3">string</span><span class="hl-1">;</span><br/><span class="hl-1">  </span><span class="hl-4">authors</span><span class="hl-1">: </span><span class="hl-3">string</span><span class="hl-1">[];</span><br/><span class="hl-1">  </span><span class="hl-4">keywords</span><span class="hl-1">: </span><span class="hl-3">string</span><span class="hl-1">[];</span><br/><span class="hl-1">  </span><span class="hl-4">abstract</span><span class="hl-1">: </span><span class="hl-3">string</span><span class="hl-1">;</span><br/><span class="hl-1">  </span><span class="hl-4">publicationDate</span><span class="hl-1">: </span><span class="hl-3">Date</span><span class="hl-1">;</span><br/><span class="hl-1">  </span><span class="hl-4">pages</span><span class="hl-1">: </span><span class="hl-3">string</span><span class="hl-1">;</span><br/><span class="hl-1">  </span><span class="hl-4">publisher</span><span class="hl-1">: </span><span class="hl-3">string</span><span class="hl-1">;</span><br/><span class="hl-1">}</span><br/><br/><span class="hl-0">export</span><span class="hl-1"> </span><span class="hl-2">interface</span><span class="hl-1"> </span><span class="hl-3">IEEEFormattable</span><span class="hl-1"> {</span><br/><span class="hl-1">  </span><span class="hl-5">exportToIEEEFormat</span><span class="hl-1">(): </span><span class="hl-3">string</span><span class="hl-1">;</span><br/><span class="hl-1">}</span>
 </code><button>Copy</button></pre>

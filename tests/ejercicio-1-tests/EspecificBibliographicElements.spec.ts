@@ -7,6 +7,7 @@ import {
   AcademicWorks,
   JournalArticle,
   Book,
+  BookPart,
 } from "../../src/ejercicio-1/EspecificBibliographicElements";
 
 describe("Patent", () => {
@@ -134,6 +135,26 @@ describe("Book", () => {
 
     const expected = "Author 1, Author 2, Title, Edition. Place: Publisher, 2024.";
     const result = book.exportToIEEEFormat();
+
+    expect(result).to.equal(expected);
+  });
+});
+
+describe("BookPart", () => {
+  it("should export to IEEE format correctly", () => {
+    const patent = new BookPart(
+      "Title",
+      ["Author 1", "Author 2"],
+      ["Keyword 1", "Keyword 2"],
+      "Abstract",
+      new Date(),
+      "10-20",
+      "Country",
+      "Publisher"
+    );
+
+    const expected = "Author 1, Author 2, Title, Country: Publisher, 2024, 10-20.";
+    const result = patent.exportToIEEEFormat();
 
     expect(result).to.equal(expected);
   });

@@ -1,7 +1,7 @@
 import { BaseBibliographicElement } from "./BaseBibliographicElement";
 
 /**
- * Class that represents a patent.
+ * Class that represents a bibliographic patent.
  */
 export class Patent extends BaseBibliographicElement {
   constructor(
@@ -26,7 +26,7 @@ export class Patent extends BaseBibliographicElement {
 }
 
 /**
- * Class that represents a technical report.
+ * Class that represents a bibliographic technical report.
  */
 export class TechnicalReport extends BaseBibliographicElement {
   constructor(
@@ -54,7 +54,7 @@ export class TechnicalReport extends BaseBibliographicElement {
 
 
 /**
- * Class that represents a technical rule.
+ * Class that represents a bibliographic technical rule.
  */
 export class TechnicalRules extends BaseBibliographicElement {
   constructor(
@@ -77,7 +77,7 @@ export class TechnicalRules extends BaseBibliographicElement {
 }
 
 /**
- * Class that represents an academic work.
+ * Class that represents a bibliographic academic work.
  */
 export class AcademicWorks extends BaseBibliographicElement {
   constructor(
@@ -104,7 +104,7 @@ export class AcademicWorks extends BaseBibliographicElement {
 }
 
 /**
- * Class that represents a journal article.
+ * Class that represents a bibliographic journal article.
  */
 export class JournalArticle extends BaseBibliographicElement {
   constructor(
@@ -130,7 +130,7 @@ export class JournalArticle extends BaseBibliographicElement {
 }
 
 /**
- * Class that represents a book.
+ * Class that represents a bibliographic book.
  */
 export class Book extends BaseBibliographicElement {
   constructor(
@@ -151,5 +151,29 @@ export class Book extends BaseBibliographicElement {
     const opcionesFormato: Intl.DateTimeFormatOptions = { year: "numeric" };
     const fechaFormateada: string = this.publicationDate.toLocaleDateString("en-US", opcionesFormato);
     return `${this.authors.join(", ")}, ${this.title}, ${this.edition}. ${this.place}: ${this.publisher}, ${fechaFormateada}.`;
+  }
+}
+
+/**
+ * Class that represents a bibliographic book part.
+ */
+export class BookPart extends BaseBibliographicElement {
+  constructor(
+    title: string,
+    authors: string[],
+    keywords: string[],
+    abstract: string,
+    publicationDate: Date,
+    pages: string,
+    public place: string,
+    public publisher: string
+  ) {
+    super(title, authors, keywords, abstract, publicationDate, pages, publisher);
+  }
+
+  exportToIEEEFormat(): string {
+    const opcionesFormato: Intl.DateTimeFormatOptions = { year: "numeric" };
+    const fechaFormateada: string = this.publicationDate.toLocaleDateString("en-US", opcionesFormato);
+    return `${this.authors.join(", ")}, ${this.title}, ${this.place}: ${this.publisher}, ${fechaFormateada}, ${this.pages}.`;
   }
 }
