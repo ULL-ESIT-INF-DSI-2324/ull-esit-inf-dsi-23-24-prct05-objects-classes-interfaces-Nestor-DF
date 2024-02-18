@@ -62,8 +62,8 @@ describe("BibliographicManager", () => {
       "Country"
     );
     const articuloRevista = new JournalArticle(
-      "Title",
-      ["Author 1", "Author 2"],
+      "Holaa",
+      ["Jhon", "Author 2"],
       ["Keyword 1", "Keyword 2"],
       "Abstract",
       new Date(),
@@ -74,7 +74,7 @@ describe("BibliographicManager", () => {
       "Pages"
     );
     const libro = new Book(
-      "Title",
+      "Holaa",
       ["Jhon", "Author 2"],
       ["Keyword 1", "Keyword 2"],
       "Abstract",
@@ -95,8 +95,8 @@ describe("BibliographicManager", () => {
   });
 
   it("should export elements in IEEE format based on given filters", () => {
-    const filters = { author: "Jhon" };
-    const expectedResults = "Jhon, Author 2, Title, Edition. Place: Publisher, 2024.";
+    const filters = { title: "Holaa", author: "Jhon" };
+    const expectedResults = 'Jhon, Author 2, "Holaa," Journal, Volume, 1 Pages, Feb 2024.\nJhon, Author 2, Holaa, Edition. Place: Publisher, 2024.';
     const actualResults = bibliographicManager.exportIEEEFormat(filters);
     expect(expectedResults).to.equal(actualResults);
   });

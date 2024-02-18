@@ -22,7 +22,7 @@ En esta práctica resolveré una serie de ejercicios de programación que me per
 
 ## **Ejercicio 1 - Gestor de referencias bibliográficas**
 
-En primer lugar, definí dos interfaces, una para los elementos bibliográficos y otra para implementar la función de exportar a formato IEEE. Las dividí principalmente por seguir el principio SOLID "Interface segregation principle".
+En primer lugar, definí dos interfaces, una para los elementos bibliográficos y otra para implementar la función de exportar a formato IEEE. Las dividí principalmente por seguir el **principio SOLID "Interface segregation principle"**.
 ```ts
 export interface BibliographicElement {
   title: string;
@@ -65,7 +65,7 @@ export abstract class BaseBibliographicElement implements BibliographicElement, 
 
 Todos ellos tendrán que implementar su correspondiente método para exportar a formato IEEE (ya que es específico en cada caso).
 
-En el siguiente código se pueden ver las clases específicas definidas junto a sus atributos adicionales y el método exportar a formato IEEE también específico. Cabe destacar que decidí este diseño por seguir la primera regla SOLID o "Single responsibility principle".
+En el siguiente código se pueden ver las clases específicas definidas junto a sus atributos adicionales y el método exportar a formato IEEE también específico. Cabe destacar que decidí este diseño por seguir la **primera regla SOLID o "Single responsibility principle"**.
 ```ts
 export class Patent extends BaseBibliographicElement {
   constructor(
@@ -275,6 +275,9 @@ export class BibliographicManager {
   }
 }
 ```
+
+Cabe destacar que `BibliographicManager` guarda una lista de `BaseBibliographicElement` que es una clase abstracta que a su vez implementa una interfaz, de esta manera `BibliographicManager` no tiene porque guardar los elementos bibliográficos como una lista usando unión de tipos (por ejemplo). Siguiendo así el **principio "Dependency inversion principle"**.
+
 
 
 

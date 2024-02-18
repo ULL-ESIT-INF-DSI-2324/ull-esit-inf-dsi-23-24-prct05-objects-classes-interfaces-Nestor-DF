@@ -32,7 +32,7 @@ export class MenuSolver {
 
   /**
    * Method that uses calculateMenu and a heuristic to calculate the best menu.
-   * Heuristic: Order by nutritional value.
+   * Heuristic: Order by nutritional value descending.
    * @param menu Is the menu to calculate the best dishes from.
    * @param maxUnhealthyScore Is the maximum unhealthy score.
    * @returns The best menu for a given maximum unhealthy score.
@@ -43,7 +43,7 @@ export class MenuSolver {
 
   /**
    * Method that uses calculateMenu and a heuristic to calculate the best menu.
-   * Heuristic: Order by unhealthy value value.
+   * Heuristic: Order by unhealthy value value ascending.
    * @param menu Is the menu to calculate the best dishes from.
    * @param maxUnhealthyScore Is the maximum unhealthy score.
    * @returns The best menu for a given maximum unhealthy score.
@@ -54,7 +54,7 @@ export class MenuSolver {
 
   /**
    * Method that uses calculateMenu and a heuristic to calculate the best menu.
-   * Heuristic: Order by nutritional value / unhealthy value  value.
+   * Heuristic: Order by nutritional value / unhealthy value descending.
    * @param menu Is the menu to calculate the best dishes from.
    * @param maxUnhealthyScore Is the maximum unhealthy score.
    * @returns The best menu for a given maximum unhealthy score.
