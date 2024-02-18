@@ -1,5 +1,5 @@
 /**
- * Interface that represents a bibliographic element.
+ * @interface Interface that represents a bibliographic element.
  */
 export interface BibliographicElement {
   title: string;
@@ -12,7 +12,7 @@ export interface BibliographicElement {
 }
 
 /**
- * Interface IEEEFormattable
+ * @interface Interface IEEEFormattable
  */
 export interface IEEEFormattable {
   exportToIEEEFormat(): string;

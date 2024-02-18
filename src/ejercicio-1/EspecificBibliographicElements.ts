@@ -1,7 +1,7 @@
 import { BaseBibliographicElement } from "./BaseBibliographicElement";
 
 /**
- * Class that represents a bibliographic patent.
+ * @class Class that represents a bibliographic patent.
  */
 export class Patent extends BaseBibliographicElement {
   constructor(
@@ -18,6 +18,10 @@ export class Patent extends BaseBibliographicElement {
     super(title, authors, keywords, abstract, publicationDate, pages, publisher);
   }
 
+  /**
+   * Method to export the patent in IEEE format.
+   * @returns The patent in IEEE format.
+   */
   exportToIEEEFormat(): string {
     const opcionesFormato: Intl.DateTimeFormatOptions = { month: "short", day: "numeric", year: "numeric" };
     const fechaFormateada: string = this.publicationDate.toLocaleDateString("en-US", opcionesFormato);
@@ -26,7 +30,7 @@ export class Patent extends BaseBibliographicElement {
 }
 
 /**
- * Class that represents a bibliographic technical report.
+ * @class Class that represents a bibliographic technical report.
  */
 export class TechnicalReport extends BaseBibliographicElement {
   constructor(
@@ -45,6 +49,10 @@ export class TechnicalReport extends BaseBibliographicElement {
     super(title, authors, keywords, abstract, publicationDate, pages, publisher);
   }
 
+  /**
+   * Method to export the technical report in IEEE format.
+   * @returns The technical report in IEEE format.
+   */
   exportToIEEEFormat(): string {
     const opcionesFormato: Intl.DateTimeFormatOptions = { month: "short", day: "numeric", year: "numeric" };
     const fechaFormateada: string = this.publicationDate.toLocaleDateString("en-US", opcionesFormato);
@@ -54,7 +62,7 @@ export class TechnicalReport extends BaseBibliographicElement {
 
 
 /**
- * Class that represents a bibliographic technical rule.
+ * @class Class that represents a bibliographic technical rule.
  */
 export class TechnicalRules extends BaseBibliographicElement {
   constructor(
@@ -69,6 +77,11 @@ export class TechnicalRules extends BaseBibliographicElement {
   ) {
     super(title, authors, keywords, abstract, publicationDate, pages, publisher);
   }
+  
+  /**
+   * Method to export the technical rule in IEEE format.
+   * @returns The technical rule in IEEE format.
+   */
   exportToIEEEFormat(): string {
     const opcionesFormato: Intl.DateTimeFormatOptions = { year: "numeric" };
     const fechaFormateada: string = this.publicationDate.toLocaleDateString("en-US", opcionesFormato);
@@ -77,7 +90,7 @@ export class TechnicalRules extends BaseBibliographicElement {
 }
 
 /**
- * Class that represents a bibliographic academic work.
+ * @class Class that represents a bibliographic academic work.
  */
 export class AcademicWorks extends BaseBibliographicElement {
   constructor(
@@ -96,6 +109,10 @@ export class AcademicWorks extends BaseBibliographicElement {
     super(title, authors, keywords, abstract, publicationDate, pages, publisher);
   }
 
+  /**
+   * Method to export the academic work in IEEE format.
+   * @returns The academic work in IEEE format.
+   */
   exportToIEEEFormat(): string {
     const opcionesFormato: Intl.DateTimeFormatOptions = { year: "numeric" };
     const fechaFormateada: string = this.publicationDate.toLocaleDateString("en-US", opcionesFormato);
@@ -104,7 +121,7 @@ export class AcademicWorks extends BaseBibliographicElement {
 }
 
 /**
- * Class that represents a bibliographic journal article.
+ * @class Class that represents a bibliographic journal article.
  */
 export class JournalArticle extends BaseBibliographicElement {
   constructor(
@@ -122,6 +139,10 @@ export class JournalArticle extends BaseBibliographicElement {
     super(title, authors, keywords, abstract, publicationDate, pages, publisher);
   }
 
+  /**
+   * Method to export the journal article in IEEE format.
+   * @returns The journal article in IEEE format.
+   */
   exportToIEEEFormat(): string {
     const opcionesFormato: Intl.DateTimeFormatOptions = { month: "short", year: "numeric" };
     const fechaFormateada: string = this.publicationDate.toLocaleDateString("en-US", opcionesFormato);
@@ -130,7 +151,7 @@ export class JournalArticle extends BaseBibliographicElement {
 }
 
 /**
- * Class that represents a bibliographic book.
+ * @class Class that represents a bibliographic book.
  */
 export class Book extends BaseBibliographicElement {
   constructor(
@@ -147,6 +168,10 @@ export class Book extends BaseBibliographicElement {
     super(title, authors, keywords, abstract, publicationDate, pages, publisher);
   }
 
+  /**
+   * Method to export the book in IEEE format.
+   * @returns The book in IEEE format.
+   */
   exportToIEEEFormat(): string {
     const opcionesFormato: Intl.DateTimeFormatOptions = { year: "numeric" };
     const fechaFormateada: string = this.publicationDate.toLocaleDateString("en-US", opcionesFormato);
@@ -155,7 +180,7 @@ export class Book extends BaseBibliographicElement {
 }
 
 /**
- * Class that represents a bibliographic book part.
+ * @class Class that represents a bibliographic book part.
  */
 export class BookPart extends BaseBibliographicElement {
   constructor(
@@ -171,6 +196,10 @@ export class BookPart extends BaseBibliographicElement {
     super(title, authors, keywords, abstract, publicationDate, pages, publisher);
   }
 
+  /**
+   * Method to export the book part in IEEE format.
+   * @returns The book part in IEEE format.
+   */
   exportToIEEEFormat(): string {
     const opcionesFormato: Intl.DateTimeFormatOptions = { year: "numeric" };
     const fechaFormateada: string = this.publicationDate.toLocaleDateString("en-US", opcionesFormato);

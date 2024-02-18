@@ -201,6 +201,27 @@ export class Book extends BaseBibliographicElement {
     return `${this.authors.join(", ")}, ${this.title}, ${this.edition}. ${this.place}: ${this.publisher}, ${fechaFormateada}.`;
   }
 }
+
+export class BookPart extends BaseBibliographicElement {
+  constructor(
+    title: string,
+    authors: string[],
+    keywords: string[],
+    abstract: string,
+    publicationDate: Date,
+    pages: string,
+    public place: string,
+    public publisher: string
+  ) {
+    super(title, authors, keywords, abstract, publicationDate, pages, publisher);
+  }
+
+  exportToIEEEFormat(): string {
+    const opcionesFormato: Intl.DateTimeFormatOptions = { year: "numeric" };
+    const fechaFormateada: string = this.publicationDate.toLocaleDateString("en-US", opcionesFormato);
+    return `${this.authors.join(", ")}, ${this.title}, ${this.place}: ${this.publisher}, ${fechaFormateada}, ${this.pages}.`;
+  }
+}
 ```
 
 Por último, implementé la clase `BibliographicManager` que se encargará de almacenar los diferentes elementos bibliográficos y de tener métodos como mostrarlos en formato tabla, filtralos y exportarlos en formato IEEE:
@@ -259,6 +280,71 @@ export class BibliographicManager {
 
 ## **Ejercicio 2 - Menús saludables orientados a objetos**
 
+En primer lugar, cree una clase para poder representar a un plato de comida:
+```ts
+export class Dish {
+  constructor(public name: string, public nutriScore: number, public unhealthyScore: number) {}
+}
+```
+La cual es muy simple ya que solo guarda el nombre del plato, su valor nutriconal y su valor de insalubridad. Eso sí, el diseño permite añadir métodos si se necesitaran.
+
+Seguidamente, cree una clase para representar una carta de restaurante o menú, que contendrá una lista de platos (los disponibles en el menú):
+```ts
+export class Menu {
+  constructor(private dishes: Dish[]) {}
+
+  getDishes(): Dish[] {
+    return this.dishes;
+  }
+
+  addDish(dish: Dish): void {
+    this.dishes.push(dish);
+  }
+}
+```
+En esta ocasión añado métodos para poder trabajar con los platos, un getter y un método para añadir un plato al menú después de creado.
+
+Por último, implementé la clase `MenuSolver` que se encargará de crear menús saludables a través de sus métodos:
+```ts
+export class MenuSolver {
+  constructor() {}
+
+  private calculateMenu(menu: Menu, maxUnhealthyScore: number, sortFn: (a: Dish, b: Dish) => number): string[] {
+    const dishes = menu.getDishes().sort(sortFn);
+    const result: string[] = [];
+    let unhealthyScore = 0;
+    let i = 0;
+    let currentDish = dishes[i];
+    while (unhealthyScore + currentDish.unhealthyScore <= maxUnhealthyScore) {
+      result.push(currentDish.name);
+      unhealthyScore += currentDish.unhealthyScore;
+      currentDish = dishes[++i];
+      if (!currentDish) {
+        break;
+      }
+    }
+    return result;
+  }
+
+  h1(menu: Menu, maxUnhealthyScore: number): string[] {
+    return this.calculateMenu(menu, maxUnhealthyScore, (a, b) => b.nutriScore - a.nutriScore);
+  }
+
+  h2(menu: Menu, maxUnhealthyScore: number): string[] {
+    return this.calculateMenu(menu, maxUnhealthyScore, (a, b) => a.unhealthyScore - b.unhealthyScore);
+  }
+
+  h3(menu: Menu, maxUnhealthyScore: number): string[] {
+    return this.calculateMenu(
+      menu,
+      maxUnhealthyScore,
+      (a, b) => b.nutriScore / b.unhealthyScore - a.nutriScore / a.unhealthyScore
+    );
+  }
+}
+```
+
+Donde h1, h2, h3 son las distintas heurísticas (métodos públicos) que usan el método privado calculateMenu para así devolver una lista de nombres de platos que conformarán el menú saludable.
 
 
 

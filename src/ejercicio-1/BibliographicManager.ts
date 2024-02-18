@@ -1,7 +1,7 @@
 import { BaseBibliographicElement } from "./BaseBibliographicElement";
 
 /**
- * BibliographicManager class that manages a list of bibliographic elements and provides methods to filter and export them.
+ * @class BibliographicManager class that manages a list of bibliographic elements and provides methods to filter and export them.
  */
 export class BibliographicManager {
   elements: BaseBibliographicElement[] = [];
@@ -10,14 +10,25 @@ export class BibliographicManager {
     this.elements = list;
   }
 
+  /**
+   * Method that adds a bibliographic element to the list.
+   * @param element Is the bibliographic element to add.
+   */
   addElement(element: BaseBibliographicElement): void {
     this.elements.push(element);
   }
 
+  /**
+   * Method that shows the list of bibliographic elements in a table format.
+   */
   showTable(): void {
     console.table(this.elements);
   }
 
+  /**
+   * Method that filters the list of bibliographic elements and shows the result in a table format.
+   * @param filters Is an object with the filters to apply to the list of bibliographic elements.
+   */
   filter(filters: { keyword?: string; title?: string; author?: string; date?: Date; publisher?: string }): void {
     console.table(
       this.elements.filter(
@@ -31,6 +42,11 @@ export class BibliographicManager {
     );
   }
 
+  /**
+   * Method that exports the list of bibliographic elements in IEEE format.
+   * @param filters Is an object with the filters to apply to the list of bibliographic elements.
+   * @returns The list of bibliographic elements in IEEE format.
+   */
   exportIEEEFormat(filters: {
     keyword?: string;
     title?: string;
