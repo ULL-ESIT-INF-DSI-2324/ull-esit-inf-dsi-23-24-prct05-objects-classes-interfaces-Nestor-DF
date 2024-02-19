@@ -2,7 +2,7 @@ import { Dish } from "./Dish";
 import { Menu } from "./Menu";
 
 /**
- * Class MenuSolver represents a menu solver that calculates the best menu for a given maximum unhealthy score.
+ * @class Class MenuSolver represents a menu solver that calculates the best menu for a given maximum unhealthy score.
  */
 export class MenuSolver {
   constructor() {}
