@@ -1,7 +1,7 @@
 import { BaseBibliographicElement } from "./BaseBibliographicElement";
 
 /**
- * @class BibliographicManager class that manages a list of bibliographic elements and provides methods to filter and export them.
+ *  BibliographicManager class that manages a list of bibliographic elements and provides methods to filter and export them.
  */
 export class BibliographicManager {
   elements: BaseBibliographicElement[] = [];
@@ -22,7 +22,15 @@ export class BibliographicManager {
    * Method that shows the list of bibliographic elements in a table format.
    */
   showTable(): void {
-    console.table(this.elements);
+    console.table(
+      this.elements.map((element) => ({
+        Title: element.title,
+        Authors: element.authors,
+        PublicationDate: element.publicationDate.toDateString(),
+        Pages: element.pages,
+        Publisher: element.publisher,
+      }))
+    );
   }
 
   /**
@@ -60,7 +68,7 @@ export class BibliographicManager {
           (!filters.keyword || element.keywords.includes(filters.keyword)) &&
           (!filters.title || element.title === filters.title) &&
           (!filters.author || element.authors.includes(filters.author)) &&
-          (!filters.date || element.publicationDate === filters.date) &&
+          (!filters.date || element.publicationDate.getTime === filters.date.getTime) &&
           (!filters.publisher || element.publisher === filters.publisher)
       )
       .map((result) => result.exportToIEEEFormat());

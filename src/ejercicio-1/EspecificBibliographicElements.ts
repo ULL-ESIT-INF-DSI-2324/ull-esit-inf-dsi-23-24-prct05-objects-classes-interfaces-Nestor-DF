@@ -1,7 +1,7 @@
 import { BaseBibliographicElement } from "./BaseBibliographicElement";
 
 /**
- * @class Class that represents a bibliographic patent.
+ *  Class that represents a bibliographic patent.
  */
 export class Patent extends BaseBibliographicElement {
   constructor(
@@ -30,7 +30,7 @@ export class Patent extends BaseBibliographicElement {
 }
 
 /**
- * @class Class that represents a bibliographic technical report.
+ *  Class that represents a bibliographic technical report.
  */
 export class TechnicalReport extends BaseBibliographicElement {
   constructor(
@@ -62,7 +62,7 @@ export class TechnicalReport extends BaseBibliographicElement {
 
 
 /**
- * @class Class that represents a bibliographic technical rule.
+ *  Class that represents a bibliographic technical rule.
  */
 export class TechnicalRules extends BaseBibliographicElement {
   constructor(
@@ -90,7 +90,7 @@ export class TechnicalRules extends BaseBibliographicElement {
 }
 
 /**
- * @class Class that represents a bibliographic academic work.
+ *  Class that represents a bibliographic academic work.
  */
 export class AcademicWorks extends BaseBibliographicElement {
   constructor(
@@ -121,7 +121,7 @@ export class AcademicWorks extends BaseBibliographicElement {
 }
 
 /**
- * @class Class that represents a bibliographic journal article.
+ *  Class that represents a bibliographic journal article.
  */
 export class JournalArticle extends BaseBibliographicElement {
   constructor(
@@ -151,7 +151,7 @@ export class JournalArticle extends BaseBibliographicElement {
 }
 
 /**
- * @class Class that represents a bibliographic book.
+ *  Class that represents a bibliographic book.
  */
 export class Book extends BaseBibliographicElement {
   constructor(
@@ -180,7 +180,7 @@ export class Book extends BaseBibliographicElement {
 }
 
 /**
- * @class Class that represents a bibliographic book part.
+ *  Class that represents a bibliographic book part.
  */
 export class BookPart extends BaseBibliographicElement {
   constructor(

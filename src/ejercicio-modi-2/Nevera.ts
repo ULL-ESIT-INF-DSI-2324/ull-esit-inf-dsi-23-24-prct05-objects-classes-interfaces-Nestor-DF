@@ -16,7 +16,7 @@ export class Nevera {
   }
 
   /**
-   * Función que añade un alimento a a lisa de alimentos, si está aumenta la cantidad
+   * Función que añade un alimento a a lista de alimentos, si está aumenta la cantidad
    * @param alimento alimento a ser añadido
    */
   aniadirAlimento(alimento: Alimento) {

@@ -27,5 +27,4 @@ describe("Nevera", () => {
     const result = nevera.ListaCompra();
     expect(result).to.deep.equal("chocolate, fanta");
   });
-
 });

@@ -238,7 +238,15 @@ export class BibliographicManager {
   }
 
   showTable(): void {
-    console.table(this.elements);
+    console.table(
+      this.elements.map((element) => ({
+        Title: element.title,
+        Authors: element.authors,
+        PublicationDate: element.publicationDate.toDateString(),
+        Pages: element.pages,
+        Publisher: element.publisher,
+      }))
+    );
   }
 
   filter(filters: { keyword?: string; title?: string; author?: string; date?: Date; publisher?: string }): void {

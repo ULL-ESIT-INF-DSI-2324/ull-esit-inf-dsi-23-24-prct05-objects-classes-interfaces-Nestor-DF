@@ -1,7 +1,7 @@
 import { Dish } from "./Dish";
 
 /**
- * @class Class Menu represents a menu with its dishes.
+ *  Class Menu represents a menu with its dishes.
  */
 export class Menu {
   constructor(private dishes: Dish[]) {}

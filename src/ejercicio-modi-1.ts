@@ -1,5 +1,6 @@
 /**
- * Enum with the different allergens
+ * Enum with the different allergens.
+ * @enum {string}
  */
 enum Allergens {
   "Gato",

@@ -2,7 +2,7 @@ import { BibliographicElement } from "./interfaces";
 import { IEEEFormattable } from "./interfaces";
 
 /**
- * @class Base class that represents a bibliographic element.
+ *  Base class that represents a bibliographic element.
  */
 export abstract class BaseBibliographicElement implements BibliographicElement, IEEEFormattable {
   constructor(
