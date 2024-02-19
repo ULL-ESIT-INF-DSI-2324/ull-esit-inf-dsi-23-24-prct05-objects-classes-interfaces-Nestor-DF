@@ -16,8 +16,7 @@ export class Nevera {
   }
 
   /**
-   * Función que añade un alimento a la lista de la compra
-   * @param alimento alimento a ser añadido
+   * Función que añade un alimento o bebida a la lista de la compra
    */
   private aniadirAListaCompra(item: Alimento | Bebida) {
     this.#listaCompra.push(item);
