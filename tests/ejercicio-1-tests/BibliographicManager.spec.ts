@@ -134,7 +134,10 @@ describe("BibliographicManager", () => {
     expect(expectedResults).to.equal(actualResults);
   });
 
+  // No se puede testear el método showTable directamente ya que no devuelve nada, solo imprime por pantalla (Lo comprobé manualmente)
   it("Table", () => {
     bibliographicManager.showTable();
   });
+  // El método filter (que básicamente es un showTable pero con un filtro) lo testeo indirectamente con el método exportIEEEFormat
+  // ya que en este testeo los filtros y los resultados esperados
 });

@@ -10,8 +10,10 @@
   - [**Introducción**](#introducción)
   - [**Ejercicio 1 - Gestor de referencias bibliográficas**](#ejercicio-1---gestor-de-referencias-bibliográficas)
   - [**Ejercicio 2 - Menús saludables orientados a objetos**](#ejercicio-2---menús-saludables-orientados-a-objetos)
+  - [**Ejercicio PE 1**](#ejercicio-pe-1)
+  - [**Ejercicio PE 2**](#ejercicio-pe-2)
   - [**Conclusiones**](#conclusiones)
-  - [**Referencias**](#referencias)
+  - [**Recursos Empleados**](#recursos-empleados)
 
 
 
@@ -359,12 +361,157 @@ Donde h1, h2, h3 son las distintas heurísticas (métodos públicos) que usan el
 
 
 
+
+## **Ejercicio PE 1**
+```ts
+enum Allergens {
+  "Gato",
+  "Polen",
+  "Chocolate",
+  "Tomate",
+  "Fresa",
+  "Marisco",
+  "Cacahuete",
+  "Huevo",
+}
+
+export function getAllergens(N: number): string[] | undefined {
+  const result: string[] = [];
+  if (N < 0) {
+    return undefined;
+  }
+  const binary: string = N.toString(2).slice(-8).padStart(8, "0");
+  for (let i = binary.length - 1; i >= 0; i--) {
+    if (binary[i] === "1") {
+      result.push(Allergens[i]);
+    }
+  }
+  return result;
+}
+```
+
+Función que recibe un número y devuelve un array de strings con los alérgenos correspondientes. 
+Se crea un tipo enumerado para almacenar las diferentes acciones. 
+En la función:
+1. Comprueba que el número sea positivo
+2. Convierte el número a una string con su representación en binario, se queda con los últimos 8 elementos y la rellena con "0" por el principio hasta tener longuitud 8. Esto asegura que siempre la cadena resultante sea de longuitud 8.
+3. Lee la cadena de atrás hacia delante y si hay un "1" pushea la acción correspondiente al array de resultados. Lo hago así para que se conserve el mismo orden que en el enunciado.
+4. Retorna el resultado.
+
+
+
+
+## **Ejercicio PE 2**
+En primer lugar, creé una interfaz `Producto` ya que tanto los alimentos como las bebidas comparten elementos en común por ser productos:
+```ts
+export interface Producto {
+  nombre: string;
+  valor_nutricional: number;
+}
+```
+
+A continuación, creo las correspondientes clases `Alimento` y `Bebida` implementando la interfaz `Producto` previamente definida y añadiendo los atributos específicos de cada una:
+```ts
+export class Alimento implements Producto {
+  constructor(public nombre: string, public valor_nutricional: number, public gramos: number) {}
+}
+
+export class Bebida implements Producto {
+  constructor(public nombre: string, public valor_nutricional: number, public litros: number) {}
+}
+```
+
+Por último, creo la clase `Nevera` que contendrá un array de tuplas de alimentos y bebidas con sus correspondientes cantidades, y un array con la unión de ambos para representar la lista de la compra.
+Hago los atributos hard private porque ya existen los correspondientes métodos de añadir / consumir y ver la lista de la compra por lo que no me interesa que se tenga acceso a ellos fuera de la clase.
+```ts
+export class Nevera {
+  #alimentos: [Alimento, number][];
+  #bebidas: [Bebida, number][];
+  #listaCompra: (Alimento | Bebida)[];
+
+  constructor() {
+    this.#alimentos = [];
+    this.#bebidas = [];
+    this.#listaCompra = [];
+  }
+
+  private aniadirAListaCompra(item: Alimento | Bebida) {
+    this.#listaCompra.push(item);
+  }
+
+  aniadirAlimento(alimento: Alimento) {
+    if (this.#alimentos.find((value) => value[0].nombre === alimento.nombre) !== undefined) {
+      this.#alimentos.forEach((item) => {
+        if (item[0].nombre === alimento.nombre) {
+          item[1]++;
+        }
+      });
+    } else {
+      this.#alimentos.push([alimento, 1]);
+    }
+  }
+
+  aniadirBebida(bebida: Bebida) {
+    if (this.#bebidas.find((value) => value[0].nombre === bebida.nombre) !== undefined) {
+      this.#bebidas.forEach((item) => {
+        if (item[0].nombre === bebida.nombre) {
+          item[1]++;
+        }
+      });
+    } else {
+      this.#bebidas.push([bebida, 1]);
+    }
+  }
+
+  consumirAlimento(alimento: Alimento) {
+    if (this.#alimentos.find((value) => value[0].nombre === alimento.nombre) === undefined) {
+      console.log("No existe");
+    }
+    this.#alimentos.map((item) => {
+      if (item[0] === alimento) {
+        if (item[1] > 1) {
+          item[1]--;
+        } else {
+          item[1]--;
+          this.aniadirAListaCompra(alimento);
+        }
+      }
+    });
+  }
+
+  consumirBebida(bebida: Bebida) {
+    if (this.#bebidas.find((value) => value[0].nombre === bebida.nombre) === undefined) {
+      console.log("No existe");
+    }
+    this.#bebidas.map((item) => {
+      if (item[0] === bebida) {
+        if (item[1] > 1) {
+          item[1]--;
+        } else {
+          item[1]--;
+          this.aniadirAListaCompra(bebida);
+        }
+      }
+    });
+  }
+
+  ListaCompra(): string {
+    const lista = this.#listaCompra.map((item) => item.nombre);
+    return lista.join(", ");
+  }
+}
+```
+
+
+
+
 ## **Conclusiones**
 En conclusión, la resolución de los ejercicios de programación me han ayudado a conocer más en profundidad los objetos, clases e interfaces del lenguaje TypeScript.
 
 
 
-## **Referencias**
+
+## **Recursos Empleados**
 
 1. OpenAI Chat: [https://chat.openai.com/](https://chat.openai.com/)
 

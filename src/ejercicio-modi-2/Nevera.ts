@@ -5,58 +5,66 @@ import { Bebida } from "./Bebida";
  * Clase nevera
  */
 export class Nevera {
-  alimentos: [Alimento, number][];
-  bebidas: [Bebida, number][];
-  listaCompra: (Alimento | Bebida)[];
+  #alimentos: [Alimento, number][];
+  #bebidas: [Bebida, number][];
+  #listaCompra: (Alimento | Bebida)[];
 
   constructor() {
-    this.alimentos = [];
-    this.bebidas = [];
-    this.listaCompra = [];
+    this.#alimentos = [];
+    this.#bebidas = [];
+    this.#listaCompra = [];
   }
 
   /**
-   * Función que añade un alimento a a lista de alimentos, si está aumenta la cantidad
+   * Función que añade un alimento a la lista de la compra
+   * @param alimento alimento a ser añadido
+   */
+  private aniadirAListaCompra(item: Alimento | Bebida) {
+    this.#listaCompra.push(item);
+  }
+
+  /**
+   * Función que añade un alimento a a lista de #alimentos, si está aumenta la cantidad
    * @param alimento alimento a ser añadido
    */
   aniadirAlimento(alimento: Alimento) {
-    if (this.alimentos.find((value) => value[0].nombre === alimento.nombre) !== undefined) {
-      this.alimentos.forEach((item) => {
+    if (this.#alimentos.find((value) => value[0].nombre === alimento.nombre) !== undefined) {
+      this.#alimentos.forEach((item) => {
         if (item[0].nombre === alimento.nombre) {
           item[1]++;
         }
       });
     } else {
-      this.alimentos.push([alimento, 1]);
+      this.#alimentos.push([alimento, 1]);
     }
   }
 
   /**
-   * Función que añade una bebida a a lista de bebidas, si está aumenta la cantidad
+   * Función que añade una bebida a a lista de #bebidas, si está aumenta la cantidad
    * @param bebida bebida a ser añadida
    */
   aniadirBebida(bebida: Bebida) {
-    if (this.bebidas.find((value) => value[0].nombre === bebida.nombre) !== undefined) {
-      this.bebidas.forEach((item) => {
+    if (this.#bebidas.find((value) => value[0].nombre === bebida.nombre) !== undefined) {
+      this.#bebidas.forEach((item) => {
         if (item[0].nombre === bebida.nombre) {
           item[1]++;
         }
       });
     } else {
-      this.bebidas.push([bebida, 1]);
+      this.#bebidas.push([bebida, 1]);
     }
   }
 
   /**
-   * Función que quita un alimento a a lista de alimentos, si está disminuye la cantidad
+   * Función que quita un alimento a a lista de #alimentos, si está disminuye la cantidad
    * Si se llega a cantidad 0 la añade a la lista de la compra
    * @param alimento alimento a ser quitado
    */
   consumirAlimento(alimento: Alimento) {
-    if (this.alimentos.find((value) => value[0].nombre === alimento.nombre) === undefined) {
+    if (this.#alimentos.find((value) => value[0].nombre === alimento.nombre) === undefined) {
       console.log("No existe");
     }
-    this.alimentos.map((item) => {
+    this.#alimentos.map((item) => {
       if (item[0] === alimento) {
         if (item[1] > 1) {
           item[1]--;
@@ -69,15 +77,15 @@ export class Nevera {
   }
 
   /**
-   * Función que quita una bebida a a lista de bebidas, si está disminuye la cantidad
+   * Función que quita una bebida a a lista de #bebidas, si está disminuye la cantidad
    * Si se llega a cantidad 0 la añade a la lista de la compra
    * @param bebida bebida a ser quitada
    */
   consumirBebida(bebida: Bebida) {
-    if (this.bebidas.find((value) => value[0].nombre === bebida.nombre) === undefined) {
+    if (this.#bebidas.find((value) => value[0].nombre === bebida.nombre) === undefined) {
       console.log("No existe");
     }
-    this.bebidas.map((item) => {
+    this.#bebidas.map((item) => {
       if (item[0] === bebida) {
         if (item[1] > 1) {
           item[1]--;
@@ -89,12 +97,12 @@ export class Nevera {
     });
   }
 
-  private aniadirAListaCompra(item: Alimento | Bebida) {
-    this.listaCompra.push(item);
-  }
-
+  /**
+   * Función que devuelve la lista de la compra
+   * @returns lista de la compra
+   */
   ListaCompra(): string {
-    const lista = this.listaCompra.map((item) => item.nombre);
+    const lista = this.#listaCompra.map((item) => item.nombre);
     return lista.join(", ");
   }
 }
