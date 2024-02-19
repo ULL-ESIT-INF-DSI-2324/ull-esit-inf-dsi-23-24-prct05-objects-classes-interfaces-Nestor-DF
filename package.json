@@ -1,7 +1,7 @@
 {
-  "name": "ull-esit-inf-dsi-23-24-prct03-vscode-nestor-df",
+  "name": "ull-esit-inf-dsi-23-24-prct05-vscode-nestor-df",
   "version": "1.0.0",
-  "description": "",
+  "description": "Práctica DSI",
   "main": "index.js",
   "scripts": {
     "test": "mocha",
