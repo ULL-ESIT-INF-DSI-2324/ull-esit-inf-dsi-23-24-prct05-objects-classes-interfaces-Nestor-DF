@@ -1,5 +1,6 @@
 import { Heuristic } from "./InterfaceHeuristic";
 import { Menu } from "./Menu";
+import { MenuSolution } from "./MenuSolution";
 
 /**
  *  Class MenuSolver represents a menu solver that calculates the best menu for a given maximum unhealthy score.
@@ -21,7 +22,7 @@ export class MenuSolver {
    * @param maxUnhealthyScore The maximum unhealthy score.
    * @returns The best menu for a given maximum unhealthy score.
    */
-  calculateMenu(menu: Menu, maxUnhealthyScore: number): string[] {
+  calculateMenu(menu: Menu, maxUnhealthyScore: number): MenuSolution {
     return this.heuristic.execute(menu, maxUnhealthyScore);
   }
 }

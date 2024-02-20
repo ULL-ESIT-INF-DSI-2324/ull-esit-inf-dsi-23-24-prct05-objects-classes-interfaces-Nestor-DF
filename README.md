@@ -42,12 +42,14 @@ export interface IEEEFormattable {
 ```
 
 A continuación, definí una clase abstracta de donde partirán el conjunto de clases de elementos bilbiográficos específicos (Obtenidos del apartado de ["Casos prácticos"](https://ull-es.libguides.com/c.php?g=674761&p=4808130) de la guía de la ULL)
+Es *importante* destacar que, por ejemplo, **TRABAJOS ACADÉMICOS** se divide en *Trabajo de Fin de Grado* y *Trabajo de Fin de Máster* o que **PARTE DE UN LIBRO** se divide en *Contribución a un Congreso* y *Capítulo de Libro*, no obstante, opté por no subdivir más la jerarquía por no complicarlo más y porque las diferencias son mínimas entre los subapartados.
 - PATENTE
 - INFORME TÉCNICO
 - NORMA TÉCNICA
 - TRABAJOS ACADÉMICOS
 - ARTÍCULO DE REVISTA
 - LIBRO
+- PARTE DE UN LIBRO
 
 ```ts
 export abstract class BaseBibliographicElement implements BibliographicElement, IEEEFormattable {
@@ -307,7 +309,7 @@ export class Menu {
   constructor(private dishes: Dish[]) {}
 
   getDishes(): Dish[] {
-    return this.dishes;
+    return [...this.dishes];
   }
 
   addDish(dish: Dish): void {
@@ -315,49 +317,80 @@ export class Menu {
   }
 }
 ```
-En esta ocasión añado métodos para poder trabajar con los platos, un getter y un método para añadir un plato al menú después de creado.
+En esta ocasión añado métodos para poder trabajar con los platos, un getter (devuelve por valor) y un método para añadir un plato al menú después de creado.
 
-Por último, implementé la clase `MenuSolver` que se encargará de crear menús saludables a través de sus métodos:
+Después, siguiendo el patron de diseño `Strategy` creé una interfaz común a las heurísticas que serán implementadas como clases individuales.
 ```ts
-export class MenuSolver {
-  constructor() {}
+export interface Heuristic {
+  execute(menu: Menu, maxUnhealthyScore: number): MenuSolution;
+}
+```
 
-  private calculateMenu(menu: Menu, maxUnhealthyScore: number, sortFn: (a: Dish, b: Dish) => number): string[] {
-    const dishes = menu.getDishes().sort(sortFn);
-    const result: string[] = [];
-    let unhealthyScore = 0;
-    let i = 0;
-    let currentDish = dishes[i];
-    while (unhealthyScore + currentDish.unhealthyScore <= maxUnhealthyScore) {
-      result.push(currentDish.name);
-      unhealthyScore += currentDish.unhealthyScore;
-      currentDish = dishes[++i];
-      if (!currentDish) {
-        break;
-      }
+La implemetación de las clases es la siguiente:
+```ts
+function Common(menu: Menu, maxUnhealthyScore: number, sortFn: (a: Dish, b: Dish) => number): MenuSolution {
+  const dishes = menu.getDishes().sort(sortFn);
+  const result: number[] = [];
+  let unhealthyScore = 0;
+  let i = 0;
+  let currentDish = dishes[i];
+  while (unhealthyScore + currentDish.unhealthyScore <= maxUnhealthyScore) {
+    result.push(menu.getDishes().indexOf(currentDish));
+    unhealthyScore += currentDish.unhealthyScore;
+    currentDish = dishes[++i];
+    if (!currentDish) {
+      break;
     }
-    return result;
   }
+  return new MenuSolution(result);
+}
 
-  h1(menu: Menu, maxUnhealthyScore: number): string[] {
-    return this.calculateMenu(menu, maxUnhealthyScore, (a, b) => b.nutriScore - a.nutriScore);
+export class FirstHeuristic implements Heuristic {
+  execute(menu: Menu, maxUnhealthyScore: number): MenuSolution {
+    return Common(menu, maxUnhealthyScore, (a, b) => b.nutriScore - a.nutriScore);
   }
+}
 
-  h2(menu: Menu, maxUnhealthyScore: number): string[] {
-    return this.calculateMenu(menu, maxUnhealthyScore, (a, b) => a.unhealthyScore - b.unhealthyScore);
+
+export class SecondHeuristic implements Heuristic {
+  execute(menu: Menu, maxUnhealthyScore: number): MenuSolution {
+    return Common(menu, maxUnhealthyScore, (a, b) => a.unhealthyScore - b.unhealthyScore);
   }
+}
 
-  h3(menu: Menu, maxUnhealthyScore: number): string[] {
-    return this.calculateMenu(
-      menu,
-      maxUnhealthyScore,
-      (a, b) => b.nutriScore / b.unhealthyScore - a.nutriScore / a.unhealthyScore
-    );
+export class ThirdHeuristic implements Heuristic {
+  execute(menu: Menu, maxUnhealthyScore: number): MenuSolution {
+    return Common(menu, maxUnhealthyScore, (a, b) => b.nutriScore / b.unhealthyScore - a.nutriScore / a.unhealthyScore);
   }
 }
 ```
 
-Donde h1, h2, h3 son las distintas heurísticas (métodos públicos) que usan el método privado calculateMenu para así devolver una lista de nombres de platos que conformarán el menú saludable.
+Se puede apreciar como cada heurística es una clase distinta que implementa la interfaz y todas usan una función en común ya que todas hacen lo mismo al final, añadir platos a un `MenuSolution`. Que en mi caso no es más que un array de number con el índice del plato que se añade al menú saluble generado. 
+**¿Por qué opté por esta aproximación?** 
+Inicialmente, me basé en la solución propuesta por el profesor *Eduardo Segredo*, que consistía en utilizar un array de booleanos para indicar qué platos se añadían y cuáles no. Sin embargo, al analizarla, busqué una alternativa más eficiente. 
+Desde el principio, no me convenció esta solución, ya que para determinar exactamente qué platos compondrían la elección final, era necesario recurrir a ambas estructuras de datos: tanto al menú original como al menú de la solución. Este enfoque resultaba engorroso. Además, consideré que si partimos de la premisa de que en un menú hay una gran cantidad de platos para elegir, mientras que en un menú de solución solo hay unos pocos, la mayoría de los elementos en la solución serían 0, indicando que esos platos no se elegían. Por lo tanto, concluí que era más eficiente utilizar un array de números (number[]) para almacenar los índices de los platos que forman parte de la solución. Este enfoque no solo simplifica la búsqueda, sino que también consume menos memoria, especialmente en menús MUY extensos.
+
+La clase `MenuSolution` es esta, se observa como el atributo que tiene es de solo lectura ya que no tiene sentido que dada la solución al problema se quiera modificar esta (o al menos eso pienso).
+```ts
+export class MenuSolution {
+  constructor(readonly menu: number[]) {}
+}
+```
+
+Ya por último implementé la clase `MenuSolver` que se encargará de guardar una heurística determinada pudiendo cambiarla a través de un método setter y de ejecutar el método que calculará el `MenuSolution` basándose en esa heurística:
+```ts
+export class MenuSolver {
+  constructor(private heuristic: Heuristic) {}
+
+  setHeuristic(heuristic: Heuristic): void {
+    this.heuristic = heuristic;
+  }
+
+  calculateMenu(menu: Menu, maxUnhealthyScore: number): MenuSolution {
+    return this.heuristic.execute(menu, maxUnhealthyScore);
+  }
+}
+```
 
 
 

@@ -11,7 +11,7 @@ export class Menu {
    * @returns The dishes from the menu.
    */
   getDishes(): Dish[] {
-    return this.dishes;
+    return [...this.dishes];
   }
 
   /**
