@@ -3,6 +3,8 @@
 - Correo: alu0101488998@ull.edu.es
 
 
+[![Coverage Status](https://coveralls.io/repos/github/ULL-ESIT-INF-DSI-2324/ull-esit-inf-dsi-23-24-prct05-objects-classes-interfaces-Nestor-DF/badge.svg?branch=main)](https://coveralls.io/github/ULL-ESIT-INF-DSI-2324/ull-esit-inf-dsi-23-24-prct05-objects-classes-interfaces-Nestor-DF?branch=main)
+
 
 ## **Índice**
 - [Práctica 5 - Objetos, clases e interfaces](#práctica-5---objetos-clases-e-interfaces)

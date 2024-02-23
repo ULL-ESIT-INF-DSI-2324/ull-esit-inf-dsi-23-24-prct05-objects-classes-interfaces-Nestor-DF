@@ -1,6 +1,6 @@
 import "mocha";
 import { expect } from "chai";
-import { getAllergens } from "../src/ejercicio-modi-1";
+import { getAllergens } from "../../src/ejercicio-pe-1/ejercicio-pe-1";
 
 describe("getAlergens", () => {
   it("should return the correct alergens", () => {
